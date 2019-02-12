@@ -1,0 +1,12 @@
+{% block main %}
+<div class="container" style="color:black">
+  <form method="POST" action="{% url 'humorge:login'%}">
+    {% csrf_token %}
+    {{form.as_p}}
+    <br><button type="submit" class="btn" name="action">login</button>
+    <br>
+  </form>
+  <p>Don't have an account?<button style="color:black" href="{% url 'humorge:register' %}"><strong>register</strong></button>here!</p>
+</div>
+
+{% endblock %}
