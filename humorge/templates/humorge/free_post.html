@@ -1,0 +1,26 @@
+{% extends 'humorge/layout.html' %}
+
+{% block main %}
+<div class="container">
+  <div class="post">
+    <div class="post-head">
+      <div class="post-title">
+        <h3><strong>{{ data.title }}</strong></h3>
+      </div>
+      <div class="post-author-date">
+        <span>{{ data.author }}</span> <span>{{ data.date }}</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="content">
+        <br>{{ data.content }}
+      </div>
+    </div>
+    <div class="post-comments">
+      <div class="comments">
+        <br>댓글
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

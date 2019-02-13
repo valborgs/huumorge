@@ -13,7 +13,7 @@
     <tbody>
       {% for data in datas %}
       <tr>
-        <td><a href="#">{{ data.title }}</td>
+        <td><a href="{% url 'humorge:freepostdetail' pk=data.pk %}">{{ data.title }}</td>
         <td>{{ data.author }}</td>
         <td>{{ data.date }}</td>
       </tr>
@@ -27,11 +27,13 @@
     </tbody>
   </table>
 </div>
-<div class="fixed-action-btn">
-  <a href="#" class="btn-floating btn-large red">
-    <i class="large material-icons">mode_edit</i>
-  </a>
-</div>
+{% if user.is_authenticated %}
+  <div class="fixed-action-btn">
+    <a href="{% url 'humorge:free_post' %}" class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+  </div>
+{% endif %}
 <div class="container">
   <ul class="pagination">
     <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>

@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from humorge.models import FreeBoard, HumorBoard, FreeComment, HumorComment
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 from django.contrib import messages
+from django.contrib.auth.models import User
+from humorge.forms import FreePostForm, HumorPostForm
 
 # Create your views here.
 
@@ -14,9 +16,17 @@ def freeboard(request):
     datas = FreeBoard.objects.order_by('-date').prefetch_related('free_comments')
     return render(request, 'humorge/freeboard.html', {'datas': datas})
 
+def free_post_detail(request, pk):
+    data = get_object_or_404(FreeBoard, pk=pk)
+    return render(request, 'humorge/free_post.html', {'data': data})
+
 def humorboard(request):
     datas = HumorBoard.objects.order_by('-date').prefetch_related('humor_comments')
     return render(request, 'humorge/humorboard.html', {'datas': datas})
+
+def humor_post_detail(request, pk):
+    data = get_object_or_404(HumorBoard, pk=pk)
+    return render(request, 'humorge/humor_post.html', {'data': data})
 
 def register(request):
     if request.method == "POST":
@@ -40,14 +50,14 @@ def register(request):
 def logout(request):
     auth_logout(request)
     messages.info(request, "Logged out successfully!")
-    return HttpResponseRedirect("humorge:mainpage")
+    return redirect(("humorge:mainpage"))
 
 def login(request):
     if request.method == "POST":
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
+        login_form = AuthenticationForm(request=request, data=request.POST)
+        if login_form.is_valid():
+            username = login_form.cleaned_data.get('username')
+            password = login_form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
                 auth_login(request, user)
@@ -59,8 +69,17 @@ def login(request):
             messages.error(request, "invalid username or password.")
 
 
-    form = AuthenticationForm
-    return render(request, 'humorge/login.html', {'form': form})
+    login_form = AuthenticationForm
+    return render(request, 'humorge/login.html', {'form': login_form})
 
-def myinfo(request):
-    return HttpResponse('datas')
+def myinfo(request, pk):
+    datas = get_object_or_404(User, pk=pk)
+    return render(request, 'humorge/myinfo.html', {'datas': datas})
+
+def free_post(request):
+    form = FreePostForm()
+    return render(request, 'humorge/post.html', {'form': form})
+
+def humor_post(request):
+    form = HumorPostForm()
+    return render(request, 'humorge/post.html', {'form': form})
