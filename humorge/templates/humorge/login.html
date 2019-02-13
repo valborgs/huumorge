@@ -4,6 +4,7 @@
 <div class="container" style="color:black">
   <form method="POST">
     {% csrf_token %}
+    <h2>로그인 해주세요!</h2>
     <br>{{form.as_p}}
     <br><button type="submit" class="btn">login</button>
   </form>

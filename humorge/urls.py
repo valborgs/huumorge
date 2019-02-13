@@ -12,7 +12,8 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login', login, name='login'),
     path('logout', logout, name='logout'),
+    path('accounts/login/', login, name='login'),
     path('myinfo/<int:pk>/', myinfo, name='myinfo'),
-    path('post/', humor_post, name='humor_post'),
-    path('post/', free_post, name='free_post')
+    path('post_humor/', humor_post, name='humor_post'),
+    path('post_free/', free_post, name='free_post')
 ]

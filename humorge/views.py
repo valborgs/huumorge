@@ -5,7 +5,10 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
-from humorge.forms import FreePostForm, HumorPostForm
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from humorge.forms import NewUserForm, FreePostForm, HumorPostForm
+
 
 # Create your views here.
 
@@ -30,18 +33,18 @@ def humor_post_detail(request, pk):
 
 def register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
+        regiform = NewUserForm(request.POST)
+        if regiform.is_valid():
+            user = regiform.save()
+            username = regiform.cleaned_data.get('username')
             messages.success(request, f"New account created: {username}")
             auth_login(request, user)
             return redirect("humorge:mainpage")
         else:
-            for msg in form.error_messages:
-                messages.error(request, f"{msg}: {form.error_messages[msg]}")
+            for msg in regiform.error_messages:
+                messages.error(request, f"{msg}: {regiform.error_messages[msg]}")
 
-            return render(request, 'humorge/register.html', {'form': form})
+            return render(request, 'humorge/register.html', {'form': regiform})
 
 
     form = UserCreationForm
@@ -76,10 +79,32 @@ def myinfo(request, pk):
     datas = get_object_or_404(User, pk=pk)
     return render(request, 'humorge/myinfo.html', {'datas': datas})
 
+@login_required
 def free_post(request):
-    form = FreePostForm()
-    return render(request, 'humorge/post.html', {'form': form})
+    if request.method == "POST":
+        free_form = FreePostForm(request.POST)
+        if free_form.is_valid():
+            free_post = free_form.save(commit=False)
+            free_post.author = request.user
+            free_post.date = timezone.now()
+            free_post.save()
+            return redirect("humorge:freepostdetail", pk=free_post.pk)
 
+    else:
+        free_form = FreePostForm()
+    return render(request, 'humorge/post_free.html', {'free_form': free_form})
+
+@login_required
 def humor_post(request):
-    form = HumorPostForm()
-    return render(request, 'humorge/post.html', {'form': form})
+    if request.method == "POST":
+        form = HumorPostForm(request.POST)
+        if form.is_valid():
+            humor_post = form.save(commit=False)
+            humor_post.author = request.user
+            humor_post.date = timezone.now()
+            humor_post.save()
+            return redirect("humorge:humorpostdetail", pk=humor_post.pk)
+
+    else:
+        form = HumorPostForm()
+    return render(request, 'humorge/post_humor.html', {'form': form})

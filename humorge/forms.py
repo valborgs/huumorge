@@ -23,9 +23,11 @@ class FreePostForm(forms.ModelForm):
     class Meta:
         model = FreeBoard
         fields = ['title', 'content']
+        widgets = {'content': TinyMCE()}
 
 class HumorPostForm(forms.ModelForm):
 
     class Meta:
         model = HumorBoard
         fields = ['title', 'content']
+        widgets = {'content': TinyMCE()}
