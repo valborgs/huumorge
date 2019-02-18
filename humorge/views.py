@@ -47,7 +47,7 @@ def register(request):
             return render(request, 'humorge/register.html', {'form': regiform})
 
 
-    form = UserCreationForm
+    form = NewUserForm
     return render(request, 'humorge/register.html', {'form': form})
 
 def logout(request):
