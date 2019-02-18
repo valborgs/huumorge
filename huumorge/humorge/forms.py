@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from tinymce.widgets import TinyMCE
-from humorge.models import FreeBoard, HumorBoard
+from humorge.models import FreeBoard, HumorBoard, FreeComment, HumorComment
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -19,6 +19,7 @@ class NewUserForm(UserCreationForm):
         return user
 
 class FreePostForm(forms.ModelForm):
+    content = forms.CharField(max_length=None, widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
     class Meta:
         model = FreeBoard
@@ -26,8 +27,15 @@ class FreePostForm(forms.ModelForm):
         widgets = {'content': TinyMCE()}
 
 class HumorPostForm(forms.ModelForm):
+    content = forms.CharField(max_length=None, widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
     class Meta:
         model = HumorBoard
         fields = ['title', 'content']
         widgets = {'content': TinyMCE()}
+
+class FreeCommentForm(forms.ModelForm):
+
+    class Meta:
+        model = FreeComment
+        fields = ['content']

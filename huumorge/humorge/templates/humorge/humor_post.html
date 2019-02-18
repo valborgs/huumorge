@@ -16,10 +16,27 @@
         <br>{{ data.content }}
       </div>
     </div>
+    {% if user.is_authenticated and user == data.author %}
+    <div class="mod">
+      <a href="#" class='btn'>수정</a><br>
+    </div>
+    {% endif %}
+    <br><hr>
     <div class="post-comments">
       <div class="comments">
-        <br>댓글
+        {% for comment in data.humor_comments.all %}
+          <br><p><strong>{{ comment.author }}</strong></p>
+          <p>{{ comment.content }}</p>
+          <p>{{ comment.date }}</p><br>
+        {% empty %}
+          <br><p>no comments here yet</p>
+        {% endfor %}
       </div>
+      {% if user.is_authenticated %}
+      <div class="write-comment">
+        <br>댓글쓰기란
+      </div>
+      {% endif %}
     </div>
   </div>
 </div>

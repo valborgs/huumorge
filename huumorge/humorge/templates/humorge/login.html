@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>유우머 게시판</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+      * {padding:0; margin:0}
+      footer {margin:auto; clear:both; padding-bottom:20px;}
+      .main {display:flex; justify-content: center;}
+    </style>
+  </head>
+  <body>
+    <div class="container" style="color:black">
+      <form method="POST">
+        <h2>로그인 해주세요!</h2>
+        {% csrf_token %}
+        <br>{{form.as_p}}
+        <br><button type="submit" class="btn">login</button>
+      </form>
+      <br><p>Don't have an account? <a href="{% url 'humorge:register' %}"><strong>register</strong></a> here!</p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src={% static "js/materialize.min.js" %}></script>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'pink rounded', displayLength:2000});</script>
+            {% elif message.tags == 'info'%}
+                <script>M.toast({html: "{{message}}", classes: 'pink rounded', displayLength:2000});</script>
+            {% elif message.tags == 'warning'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+  </body>
+</html>
