@@ -14,7 +14,11 @@
       {% for data in datas %}
       <tr>
         <td><a href="{% url 'humorge:freepostdetail' pk=data.pk %}">{{ data.title }}</td>
-        <td>{{ data.author }}</td>
+        {% if data.nickname %}
+          <td>{{ data.nickname }}</td>
+        {% else %}
+          <td>{{ data.author }}</td>
+        {% endif %}
         <td>{{ data.date }}</td>
       </tr>
       {% empty %}
