@@ -6,10 +6,11 @@ from humorge.models import FreeBoard, HumorBoard, FreeComment, HumorComment
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    nickname = forms.CharField(required=True)
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "nickname", "email", "password1", "password2")
 
     def save(self, commit=True):
         user =super(NewUserForm, self).save(commit=False)
