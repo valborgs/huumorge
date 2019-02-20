@@ -42,7 +42,7 @@
 <div class="container" style="padding-top:30px">
   <ul class="pagination" style="text-align:center">
     {% if datas.has_previous %}
-      <li><a href="?page=1"><i class="material-icons">fast_rewind</i></a></li>
+      <li class="waves-effect"><a href="?page=1"><i class="material-icons">fast_rewind</i></a></li>
       <li class="waves-effect"><a href="?page={{ datas.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
     {% endif %}
     {% for num in datas.paginator.page_range %}
@@ -54,7 +54,7 @@
     {% endfor %}
     {% if datas.has_next %}
       <li class="waves-effect"><a href="?page={{ datas.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
-      <li><a href="?page={{ datas.paginator.num_pages}}"><i class="material-icons">fast_forward</i></a>/</li>
+      <li class="waves-effect"><a href="?page={{ datas.paginator.num_pages}}"><i class="material-icons">fast_forward</i></a>/</li>
     {% endif %}
   </ul>
 </div>
