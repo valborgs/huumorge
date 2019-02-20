@@ -18,7 +18,7 @@ def mainpage(request):
 
 def freeboard(request):
     data = FreeBoard.objects.order_by('-date').prefetch_related('free_comments')
-    paginator = Paginator(data, 10)
+    paginator = Paginator(data, 12)
     page = request.GET.get('page')
     datas = paginator.get_page(page)
     return render(request, 'humorge/freeboard.html', {'datas': datas})
@@ -29,7 +29,7 @@ def free_post_detail(request, pk):
 
 def humorboard(request):
     data = HumorBoard.objects.order_by('-date').prefetch_related('humor_comments')
-    paginator = Paginator(data, 10)
+    paginator = Paginator(data, 12)
     page = request.GET.get('page')
     datas = paginator.get_page(page)
     return render(request, 'humorge/humorboard.html', {'datas': datas})
