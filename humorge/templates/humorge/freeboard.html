@@ -45,7 +45,7 @@
       <a href="?page=1">first</a>
       <li class="waves-effect"><a href="?page={{ datas.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
     {% endif %}
-    {% for num in datas.page_range %}
+    {% for num in datas.paginator.page_range %}
       {% if datas.number == num %}
         <li class="disabled"><a href="?page={{ num }}">{{ num }}</a></li>
       {% elif num > datas.number|add:'-3' and num < datas.number|add:'3' %}
