@@ -39,14 +39,20 @@
   </div>
 {% endif %}
 <div class="container" style="padding-top:30px">
-  <ul class="pagination" style="text-align:center">
-    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-    <li class="active"><a href="#!">1</a></li>
-    <li class="waves-effect"><a href="#!">2</a></li>
-    <li class="waves-effect"><a href="#!">3</a></li>
-    <li class="waves-effect"><a href="#!">4</a></li>
-    <li class="waves-effect"><a href="#!">5</a></li>
-    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-  </ul>
+  <div class="pagination" style="text-align:center">
+    <span>
+      {% if datas.has_previous %}
+        <a href="?page=1">first</a>
+        <a href="?page={{ datas.previous_page_number }}">previous</a>
+      {% endif %}
+      <span>
+        page {{ datas.number }} of {{ datas.paginator.num_pages }}.
+      </span>
+      {% if datas.has_next %}
+        <a href="?page={{ datas.next_page_number }}">next</a>
+        <a href="?page={{ datas.paginator.num_pages}}">last</a>
+      {% endif %}
+    </span>
+  </div>
 </div>
 {% endblock %}

@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from humorge.forms import NewUserForm, FreePostForm, HumorPostForm
 
 
@@ -16,7 +17,10 @@ def mainpage(request):
     return render(request, 'humorge/index.html')
 
 def freeboard(request):
-    datas = FreeBoard.objects.order_by('-date').prefetch_related('free_comments')
+    data = FreeBoard.objects.order_by('-date').prefetch_related('free_comments')
+    paginator = Paginator(data, 15)
+    page = request.GET.get('page')
+    datas = paginator.get_page(page)
     return render(request, 'humorge/freeboard.html', {'datas': datas})
 
 def free_post_detail(request, pk):
@@ -24,7 +28,10 @@ def free_post_detail(request, pk):
     return render(request, 'humorge/free_post.html', {'data': data})
 
 def humorboard(request):
-    datas = HumorBoard.objects.order_by('-date').prefetch_related('humor_comments')
+    data = HumorBoard.objects.order_by('-date').prefetch_related('humor_comments')
+    paginator = Paginator(data, 15)
+    page = request.GET.get('page')
+    datas = paginator.get_page(page)
     return render(request, 'humorge/humorboard.html', {'datas': datas})
 
 def humor_post_detail(request, pk):
