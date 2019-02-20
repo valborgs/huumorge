@@ -45,9 +45,13 @@
       <a href="?page=1">first</a>
       <li class="waves-effect"><a href="?page={{ datas.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
     {% endif %}
-    <li>
-      page {{ datas.number }} of {{ datas.paginator.num_pages }}.
-    </li>
+    {% for num in datas.paginator.page_range %}
+      {% if datas.number == num %}
+        <li class="disabled"><a href="?page={{ num }}">{{ num }}</a></li>
+      {% elif num > datas.number|add:'-3' and num < datas.number|add:'3' %}
+        <li class="waves-effect"><a href="?page={{ num }}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
     {% if datas.has_next %}
       <li class="waves-effect"><a href="?page={{ datas.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
       <a href="?page={{ datas.paginator.num_pages}}">last</a>
