@@ -31,15 +31,15 @@ ALLOWED_HOSTS = ['li999-23.members.linode.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'humorge.apps.HumorgeConfig',
+    'users.apps.UsersConfig',
+    'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'humorge.apps.HumorgeConfig',
-    'tinymce',
-    'users'
+    'django.contrib.staticfiles'
 ]
 
 TINYMCE_DEFAULT_CONFIG = {
@@ -153,4 +153,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/huumorge/humorge/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'var/www/huumorge/humorge/media/img/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
