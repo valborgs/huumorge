@@ -2,7 +2,7 @@
 <header class="page-header">
   <nav>
     <div class="nav-wrapper">
-      {% load media %}
+      {% get_media_prefix %}
       <a href="{% url 'humorge:mainpage' %}" class="brand-logo"><img src="{% media 'img/logo.png' %}" alt="로고" style="height:60px">유우머게시판</a>
       <ul class="right">
         <li><a href="{% url 'humorge:freeboard' %}">자유게</a></li>
