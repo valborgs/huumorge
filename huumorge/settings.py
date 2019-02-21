@@ -153,4 +153,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/huumorge/humorge/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/var/www/huumorge/humorge/media/img/'
+MEDIA_ROOT = 'var/www/huumorge/humorge/media/img/'
