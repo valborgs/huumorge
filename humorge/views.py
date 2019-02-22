@@ -82,9 +82,7 @@ def login(request):
     login_form = AuthenticationForm
     return render(request, 'humorge/login.html', {'form': login_form})
 
-def myinfo(request, pk):
-    datas = get_object_or_404(User, pk=pk)
-    return render(request, 'humorge/myinfo.html', {'datas': datas})
+
 
 @login_required
 def free_post(request):
