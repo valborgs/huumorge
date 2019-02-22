@@ -8,8 +8,12 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils import timezone
 from .forms import NewUserForm, UserUpdateForm, ProfileUpdateForm
+import sys
+
 
 # Create your views here.
+
+
 
 def register(request):
     if request.method == "POST":
@@ -56,6 +60,8 @@ def login(request):
 
 @login_required
 def myinfo(request, pk):
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
     if request.method == "POST":
         userinfo_update = UserUpdateForm(request.POST, instance=request.user)
         image_update = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
