@@ -40,11 +40,5 @@
               {% endif %}
           {% endfor %}
       {% endif %}
-      <script>
-      $( document ).ready(function() {
-        $('.modal').modal();
-        $('.modal-content').load("{% url 'humorge:login' %}")
-      });
-      </script>
   </body>
 </html>
