@@ -8,11 +8,11 @@
         <li><a href="{% url 'humorge:freeboard' %}">자유게</a></li>
         <li><a href="{% url 'humorge:humorboard' %}">유머게</a></li>
         {% if user.is_authenticated %}
-        <li><a href="{% url 'humorge:myinfo' pk=user.pk %}">{{user.username}}</a></li>
-        <li><a href="{% url 'humorge:logout' %}">로그아웃</a></li>
+        <li><a href="{% url 'users:myinfo' pk=user.pk %}">{{user.username}}</a></li>
+        <li><a href="{% url 'users:logout' %}">로그아웃</a></li>
         {% else %}
-        <li><a href="{% url 'humorge:register' %}">회원가입</a></li>
-        <li><a href="{% url 'humorge:login' %}">로그인</a></li>
+        <li><a href="{% url 'users:register' %}">회원가입</a></li>
+        <li><a href="{% url 'users:login' %}">로그인</a></li>
         {% endif %}
       </ul>
     </div>
