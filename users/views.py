@@ -62,7 +62,7 @@ def myinfo(request, pk):
             userinfo_update.save()
             image_update.save()
             messages.info(request, "Your information has been changed!")
-            return redirect("users:myinfo")
+            return redirect("users:myinfo", pk)
         else:
             messages.error(request, "can't change your information!")
 
