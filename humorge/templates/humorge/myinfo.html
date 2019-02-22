@@ -1,4 +1,5 @@
 {% extends 'humorge/layout.html' %}
+{% load crispy_forms_tags %}
 
 {% block main %}
 <div class="container">
@@ -18,6 +19,20 @@
   <div class="image">
     <br>
     <img src="{{ datas.profile.image.url }}" alt="프로필이미지">
+    <br>
+    {{ img }}
+  </div>
+  <div class="update_info">
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+      <br>
+      {% csrf_token %}
+      <h2>정보변경</h2>
+      <br>{{ update|crispy }}
+      <br>{{ img|crispy }}
+      <br><button type="submit" class="btn">수정</button>
+    </form>
+
   </div>
 </div>
 {% endblock %}

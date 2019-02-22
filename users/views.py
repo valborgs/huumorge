@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login, logout as auth_logout, auth
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils import timezone
-from users.forms import NewUserForm
+from .forms import NewUserForm, UserUpdateForm, ProfileUpdateForm
 
 # Create your views here.
 
@@ -55,5 +55,7 @@ def login(request):
 
 @login_required
 def myinfo(request, pk):
+    userinfo_update = UserUpdateForm()
+    image_update = ProfileUpdateForm()
     datas = get_object_or_404(User, pk=pk)
-    return render(request, 'humorge/myinfo.html', {'datas': datas})
+    return render(request, 'humorge/myinfo.html', {'datas': datas, 'update':userinfo_update, 'img':image_update})
