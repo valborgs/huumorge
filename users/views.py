@@ -6,6 +6,7 @@ from django.contrib.auth import login as auth_login, logout as auth_logout, auth
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils import timezone
+from users.forms import NewUserForm
 
 # Create your views here.
 

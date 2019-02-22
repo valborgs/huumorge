@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from humorge.forms import NewUserForm, FreePostForm, HumorPostForm
+from humorge.forms import FreePostForm, HumorPostForm
 
 
 # Create your views here.
