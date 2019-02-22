@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'humorge.apps.HumorgeConfig',
     'users.apps.UsersConfig',
     'tinymce',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles'
 ]
+
+CRISPY_TEMPLATE_PACK ='bootstrap4'
 
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,
