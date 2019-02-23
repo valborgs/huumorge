@@ -5,7 +5,6 @@ from .models import Profile
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    nickname = forms.CharField(required=True)
 
     class Meta:
         model = User
