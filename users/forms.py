@@ -9,19 +9,18 @@ class NewUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "nickname", "email", "password1", "password2")
+        fields = ("username", "email", "password1", "password2")
 
     def save(self, commit=True):
-        user =super(NewUserForm, self).save(commit=False)
+        user = super(NewUserForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
-        user.nickname = self.cleaned_data["nickname"]
         if commit:
-            user.save()
+            user.save(commit=True)
         return user
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(required=True)
-    nickname = forms.CharField(required=True)
+    nickname = forms.CharField()
 
     class Meta:
         model = User
