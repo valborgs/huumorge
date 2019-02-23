@@ -18,7 +18,7 @@ def register(request):
     if request.method == "POST":
         regiform = NewUserForm(request.POST)
         if regiform.is_valid():
-            user = regiform.save()
+            user = regiform.form_save()
             username = regiform.cleaned_data.get('username')
             messages.success(request, f"New account created: {username}")
             auth_login(request, user)
