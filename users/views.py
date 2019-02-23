@@ -30,7 +30,7 @@ def register(request):
             return render(request, 'humorge/register.html', {'form': regiform})
 
     form = NewUserForm
-    return render(request, 'humorge/register.html', {'form': form})
+    return render(request, 'users/register.html', {'form': form})
 
 def logout(request):
     auth_logout(request)
@@ -55,7 +55,7 @@ def login(request):
 
 
     login_form = AuthenticationForm
-    return render(request, 'humorge/login.html', {'form': login_form})
+    return render(request, 'users/login.html', {'form': login_form})
 
 @login_required
 def myinfo(request, pk):
@@ -73,4 +73,4 @@ def myinfo(request, pk):
     userinfo_update = UserUpdateForm(instance=request.user)
     image_update = ProfileUpdateForm(instance=request.user.profile)
     datas = get_object_or_404(User, pk=pk)
-    return render(request, 'humorge/myinfo.html', {'datas': datas, 'update':userinfo_update, 'img':image_update})
+    return render(request, 'users/myinfo.html', {'datas': datas, 'update':userinfo_update, 'img':image_update})
