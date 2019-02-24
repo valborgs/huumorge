@@ -28,6 +28,11 @@ def free_post_detail(request, pk):
     data = get_object_or_404(FreeBoard, pk=pk)
     return render(request, 'humorge/free_post.html', {'data': data})
 
+def free_post_remove(request, pk):
+    data = get_object_or_404(FreeBoard, pk=pk)
+    data.delete()
+    return redirect("humorge:freeboard")
+
 def humorboard(request):
     data = HumorBoard.objects.order_by('-date').prefetch_related('humor_comments')
     paginator = Paginator(data, 12)
@@ -38,6 +43,11 @@ def humorboard(request):
 def humor_post_detail(request, pk):
     data = get_object_or_404(HumorBoard, pk=pk)
     return render(request, 'humorge/humor_post.html', {'data': data})
+
+def humor_post_remove(request, pk):
+    data = get_object_or_404(HumorBoard, pk=pk)
+    data.delete()
+    return redirect("humorge:humorboard")
 
 @login_required
 def free_post(request):
