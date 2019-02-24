@@ -2,13 +2,14 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from tinymce import HTMLField
 
 # Create your models here.
 
 class FreeBoard(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content = HTMLField('Content')
     date = models.DateTimeField(default=timezone.now)
 
     def write(self):
@@ -34,7 +35,7 @@ class FreeComment(models.Model):
 class HumorBoard(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content = HTMLField('Content')
     date = models.DateTimeField(default=timezone.now)
 
     def write(self):
