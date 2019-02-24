@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import mainpage, freeboard, humorboard, free_post_detail, humor_post_detail, free_post, humor_post, free_post_remove, humor_post_remove
+from .views import mainpage, freeboard, humorboard, free_post_detail, humor_post_detail, free_post, humor_post, free_post_remove, humor_post_remove, free_post_mod, humor_post_mod
 
 app_name = 'humorge'
 
