@@ -7,8 +7,8 @@
     <thead>
       <tr>
         <th>제목</th>
-        <th class="right-align">글쓴이</th>
-        <th class="right-align">날짜</th>
+        <th>글쓴이</th>
+        <th>날짜</th>
       </tr>
     </thead>
     <tbody>
@@ -18,9 +18,9 @@
         {% if data.nickname %}
           <td>{{ data.nickname }}</td>
         {% else %}
-          <td class="right-align">{{ data.author }}</td>
+          <td>{{ data.author }}</td>
         {% endif %}
-        <td class="right-align">{{ data.date }}</td>
+        <td>{{ data.date }}</td>
       </tr>
       {% empty %}
         <tr>
