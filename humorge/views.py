@@ -27,7 +27,16 @@ def freeboard(request):
 
 def free_post_detail(request, pk):
     data = get_object_or_404(FreeBoard, pk=pk)
-    return render(request, 'humorge/free_post.html', {'data': data})
+    if request.method == "POST":
+        comment_form = FreeCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.freeboard = free_post
+            comment.save()
+            return redirect("humorge:freepostdetail", pk=free_post.pk)
+    else:
+        comment_form = FreeCommentForm()
+    return render(request, 'humorge/free_post.html', {'data': data, 'form': comment_form})
 
 def free_post_remove(request, pk):
     data = get_object_or_404(FreeBoard, pk=pk)
@@ -43,7 +52,16 @@ def humorboard(request):
 
 def humor_post_detail(request, pk):
     data = get_object_or_404(HumorBoard, pk=pk)
-    return render(request, 'humorge/humor_post.html', {'data': data})
+    if request.method == "POST":
+        comment_form = HumorCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.humorboard = humor_post
+            comment.save()
+            return redirect("humorge:humorpostdetail", pk=humor_post.pk)
+    else:
+        comment_form = HumorCommentForm()
+    return render(request, 'humorge/humor_post.html', {'data': data, 'form': comment_form})
 
 def humor_post_remove(request, pk):
     data = get_object_or_404(HumorBoard, pk=pk)

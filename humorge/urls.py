@@ -15,7 +15,5 @@ urlpatterns = [
     path('post_humor', humor_post, name='humor_post'),
     path('humorboard/<int:pk>/remove', humor_post_remove, name='humor_post_remove'),
     path('humorboard/<int:pk>/mod', humor_post_mod, name='humor_post_mod'),
-    path('freeboard/<int:pk>/comment', free_post_comment, name='free_post_comment'),
-    path('humorboard/<int:pk>/comment', humor_post_comment, name='humor_post_comment'),
 
 ]
