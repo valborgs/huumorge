@@ -109,4 +109,4 @@ def humor_post_mod(request, pk):
 
     else:
         humor_form = HumorPostForm(instance=data)
-    return render(request, 'humorge/post_humor.html', {'form': form})
+    return render(request, 'humorge/post_humor.html', {'form': humor_form})
