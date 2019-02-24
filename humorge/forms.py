@@ -3,19 +3,13 @@ from tinymce.widgets import TinyMCE
 from humorge.models import FreeBoard, HumorBoard, FreeComment, HumorComment
 
 
-class TinyMCEWidget(TinyMCE):
-    def use_required_attribute(self, *args):
-        return False
-
 class FreePostForm(forms.ModelForm):
-    content = forms.CharField(widget=TinyMCEWidget(attrs={'cols': 80, 'rows': 30}))
 
     class Meta:
         model = FreeBoard
         fields = ['title', 'content']
 
 class HumorPostForm(forms.ModelForm):
-    content = forms.CharField(widget=TinyMCEWidget(attrs={'cols': 80, 'rows': 30}))
 
     class Meta:
         model = HumorBoard
