@@ -21,8 +21,8 @@ from users import views as user_views
 
 
 urlpatterns = [
-    path('admin', admin.site.urls),
-    path('tinymce', include('tinymce.urls')),
+    path('admin/', admin.site.urls),
+    path('tinymce/', include('tinymce.urls')),
     path('', include('humorge.urls')),
     path('', include('users.urls')),
 ]
