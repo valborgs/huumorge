@@ -21,7 +21,7 @@
     </div>
     {% if user.is_authenticated and user == data.author %}
     <div class="mod">
-      <a href="#" class='btn'>수정</a><br>
+      <a href="{% url 'humorge:free_post_mod' pk=data.pk %}" class='btn'>수정</a><br>
       <a href="{% url 'humorge:free_post_remove' pk=data.pk %}" class='btn'>삭제</a><br>
     </div>
     {% endif %}

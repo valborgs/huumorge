@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.views.generic import UpdateView
 from humorge.forms import FreePostForm, HumorPostForm
 
 
@@ -77,4 +78,35 @@ def humor_post(request):
 
     else:
         form = HumorPostForm()
+    return render(request, 'humorge/post_humor.html', {'form': form})
+
+
+@login_required
+def free_post_mod(request, pk):
+    data = get_object_or_404(FreeBoard, pk=pk)
+    if request.method == "POST":
+        free_form = FreePostForm(request.POST, instance=free_post)
+        if free_form.is_valid():
+            free_post = free_form.save(commit=False)
+            free_post.author = request.user
+            free_post.save()
+            return redirect("humorge:freepostdetail", pk=free_post.pk)
+
+    else:
+        free_form = FreePostForm(instance=free_post)
+    return render(request, 'humorge/post_free.html', {'free_form': free_form})
+
+@login_required
+def humor_post_mod(request, pk):
+    data = get_object_or_404(HumorBoard, pk=pk)
+    if request.method == "POST":
+        humor_form = HumorPostForm(request.POST, instance=humor_post)
+        if humor_form.is_valid():
+            humor_post = form.save(commit=False)
+            humor_post.author = request.user
+            humor_post.save()
+            return redirect("humorge:humorpostdetail", pk=humor_post.pk)
+
+    else:
+        humor_form = HumorPostForm(instance=humor_post)
     return render(request, 'humorge/post_humor.html', {'form': form})
