@@ -85,7 +85,7 @@ def humor_post(request):
 def free_post_mod(request, pk):
     data = get_object_or_404(FreeBoard, pk=pk)
     if request.method == "POST":
-        free_form = FreePostForm(request.POST, instance=free_post)
+        free_form = FreePostForm(request.POST, instance=data)
         if free_form.is_valid():
             free_post = free_form.save(commit=False)
             free_post.author = request.user
@@ -100,7 +100,7 @@ def free_post_mod(request, pk):
 def humor_post_mod(request, pk):
     data = get_object_or_404(HumorBoard, pk=pk)
     if request.method == "POST":
-        humor_form = HumorPostForm(request.POST, instance=humor_post)
+        humor_form = HumorPostForm(request.POST, instance=data)
         if humor_form.is_valid():
             humor_post = form.save(commit=False)
             humor_post.author = request.user
