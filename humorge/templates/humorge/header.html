@@ -3,9 +3,9 @@
   <nav>
     <div class="nav-wrapper" style="display:inline">
       {% load static %}
-      <a href="#"><i class="material-icons">dehaze</i></a>
+      <a href="#"><i class="material-icons show-on-small">dehaze</i></a>
       <a href="{% url 'humorge:mainpage' %}" class="brand-logo"><img src="{% static 'media/img/logo.png' %}" alt="로고" style="height:60px">유우머게시판</a>
-      <ul id="nav-mobile" class="right-align hide-on-small-only">
+      <ul id="nav-mobile" class="right hide-on-small-only">
         <li><a href="{% url 'humorge:freeboard' %}">자유게</a></li>
         <li><a href="{% url 'humorge:humorboard' %}">유머게</a></li>
         {% if user.is_authenticated %}
