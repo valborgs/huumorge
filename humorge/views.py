@@ -31,7 +31,7 @@ def free_post_detail(request, pk):
         comment_form = FreeCommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
-            comment.freeboard = post
+            comment.freeboard = free_post.pk
             comment.save()
             return redirect("humorge:freepostdetail", pk=free_post.pk)
     else:
@@ -56,7 +56,7 @@ def humor_post_detail(request, pk):
         comment_form = HumorCommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
-            comment.humorboard = post
+            comment.humorboard = humor_post.pk
             comment.save()
             return redirect("humorge:humorpostdetail", pk=humor_post.pk)
     else:
