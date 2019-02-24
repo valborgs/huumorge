@@ -35,7 +35,7 @@ def free_post_detail(request, pk):
             comment.author = request.user
             comment.date = timezone.now()
             comment.save()
-            return redirect("humorge:freepostdetail", pk=free_post.pk)
+            return redirect("humorge:freepostdetail", pk=data.pk)
     else:
         comment_form = FreeCommentForm()
     return render(request, 'humorge/free_post.html', {'data': data, 'form': comment_form})
@@ -62,7 +62,7 @@ def humor_post_detail(request, pk):
             comment.author = request.user
             comment.date = timezone.now()
             comment.save()
-            return redirect("humorge:humorpostdetail", pk=humor_post.pk)
+            return redirect("humorge:humorpostdetail", pk=data.pk)
     else:
         comment_form = HumorCommentForm()
     return render(request, 'humorge/humor_post.html', {'data': data, 'form': comment_form})
