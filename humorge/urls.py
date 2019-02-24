@@ -5,6 +5,7 @@ app_name = 'humorge'
 
 urlpatterns = [
     path('', mainpage, name='mainpage'),
+    path('tinymce', include('tinymce.urls')),
     path('freeboard', freeboard, name='freeboard'),
     path('freeboard/<int:pk>', free_post_detail, name='freepostdetail'),
     path('post_free', free_post, name='free_post'),
