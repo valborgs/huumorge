@@ -20,9 +20,9 @@
       </div>
     </div>
     {% if user.is_authenticated and user == data.author %}
-    <div class="mod right-align" style="display:inline">
-      <a href="{% url 'humorge:free_post_mod' pk=data.pk %}" class='btn'>수정</a>
-      <a href="{% url 'humorge:free_post_remove' pk=data.pk %}" class='btn'>삭제</a>
+    <div class="mod" style="display:inline">
+      <a href="{% url 'humorge:free_post_mod' pk=data.pk %}" class='btn right'>수정</a>
+      <a href="{% url 'humorge:free_post_remove' pk=data.pk %}" class='btn right'>삭제</a>
     </div>
     {% endif %}
     <br><hr>
