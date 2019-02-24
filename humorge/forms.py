@@ -24,3 +24,9 @@ class FreeCommentForm(forms.ModelForm):
     class Meta:
         model = FreeComment
         fields = ['content']
+
+class HumorCommentForm(forms.ModelForm):
+
+    class Meta:
+        model = HumorComment
+        fields = ['content']

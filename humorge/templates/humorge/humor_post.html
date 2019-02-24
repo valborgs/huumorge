@@ -38,7 +38,9 @@
       </div>
       {% if user.is_authenticated %}
       <div class="write-comment">
-        <br>댓글쓰기란
+        {% block comments %}
+        {% include "humorge/humor_comment.html" %}
+        {% endblock %}
       </div>
       {% endif %}
     </div>

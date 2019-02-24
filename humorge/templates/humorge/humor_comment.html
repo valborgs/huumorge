@@ -1,0 +1,10 @@
+{% block comments %}
+<div class="container">
+  <form method="POST">
+    <br>
+    {% csrf_token %}
+    <br>{{form.as_p}}
+    <br><button type="submit" class="btn">submit</button>
+  </form>
+</div>
+{% endblock %}

@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.views.generic import UpdateView
-from humorge.forms import FreePostForm, HumorPostForm
+from humorge.forms import FreePostForm, HumorPostForm, FreeCommentForm, HumorCommentForm
 
 
 # Create your views here.
@@ -110,3 +110,31 @@ def humor_post_mod(request, pk):
     else:
         humor_form = HumorPostForm(instance=data)
     return render(request, 'humorge/post_humor.html', {'form': humor_form})
+
+@login_required
+def free_post_comment(request, pk):
+    post = get_object_or_404(FreeBoard, pk=pk)
+    if request.method == "POST":
+        comment_form = FreeCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.freeboard = free_post
+            comment.save()
+            return redirect("humorge:freepostdetail", pk=free_post.pk)
+    else:
+        comment_form = FreeCommentForm()
+    return render(request, 'humorge/free_comment.html', {'form': comment_form})
+
+@login_required
+def humor_post_comment(request, pk):
+    post = get_object_or_404(HumorBoard, pk=pk)
+    if request.method == "POST":
+        comment_form = HumorCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.humorboard = humor_post
+            comment.save()
+            return redirect("humorge:humorpostdetail", pk=humor_post.pk)
+    else:
+        comment_form = HumorCommentForm()
+    return render(request, 'humorge/humor_comment.html', {'form': comment_form})
