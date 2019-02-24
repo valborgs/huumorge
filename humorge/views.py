@@ -102,7 +102,7 @@ def humor_post_mod(request, pk):
     if request.method == "POST":
         humor_form = HumorPostForm(request.POST, instance=data)
         if humor_form.is_valid():
-            humor_post = form.save(commit=False)
+            humor_post = humor_form.save(commit=False)
             humor_post.author = request.user
             humor_post.save()
             return redirect("humorge:humorpostdetail", pk=humor_post.pk)
