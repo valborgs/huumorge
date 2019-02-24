@@ -93,7 +93,7 @@ def free_post_mod(request, pk):
             return redirect("humorge:freepostdetail", pk=free_post.pk)
 
     else:
-        free_form = FreePostForm(instance=free_post)
+        free_form = FreePostForm(instance=data)
     return render(request, 'humorge/post_free.html', {'free_form': free_form})
 
 @login_required
@@ -108,5 +108,5 @@ def humor_post_mod(request, pk):
             return redirect("humorge:humorpostdetail", pk=humor_post.pk)
 
     else:
-        humor_form = HumorPostForm(instance=humor_post)
+        humor_form = HumorPostForm(instance=data)
     return render(request, 'humorge/post_humor.html', {'form': form})
