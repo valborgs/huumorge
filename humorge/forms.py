@@ -1,18 +1,21 @@
 from django import forms
+from django.contrib.flatpages.models import FlatPage
 from tinymce.widgets import TinyMCE
 from humorge.models import FreeBoard, HumorBoard, FreeComment, HumorComment
 
 
 class FreePostForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
     class Meta:
-        model = FreeBoard
+        model = FlatPage
         fields = ['title', 'content']
 
 class HumorPostForm(forms.ModelForm):
-
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+    
     class Meta:
-        model = HumorBoard
+        model = FlatPage
         fields = ['title', 'content']
 
 class FreeCommentForm(forms.ModelForm):
