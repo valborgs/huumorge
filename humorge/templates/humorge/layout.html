@@ -4,14 +4,10 @@
     <meta charset="utf-8">
     <title>유우머 게시판</title>
     {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static "css/selfcss.css" %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-      * {padding:0; margin:0}
-      footer {margin:auto; clear:both; padding-bottom:20px;}
-      .main {display:flex; justify-content: center;}
-    </style>
     {{ form.media }}
   </head>
   <body>
