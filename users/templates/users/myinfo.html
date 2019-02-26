@@ -8,10 +8,6 @@
     <br>
     <p><strong>아이디</strong> {{ datas.username }}</p>
   </div>
-  <div class="myinfo_nickname">
-    <br>
-    <p><strong>닉네임</strong> {{ datas.nickname }}</p>
-  </div>
   <div class="myinfo_email">
     <br>
     <p><strong>이메일</strong> {{ datas.email }}</p>
@@ -20,6 +16,7 @@
     <br>
     <img src="{{ datas.profile.image.url }}" alt="프로필이미지">
   </div>
+  {% if user.is_authenticated and user == datas.username %}
   <div class="update_info">
     <br>
     <form method="POST" enctype="multipart/form-data">
@@ -30,7 +27,7 @@
       <br>{{ img|crispy }}
       <br><button type="submit" class="btn">수정</button>
     </form>
-
   </div>
+  {% endif %}
 </div>
 {% endblock %}
