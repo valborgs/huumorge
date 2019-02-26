@@ -16,7 +16,7 @@
     <br>
     <img src="{{ datas.profile.image.url }}" alt="프로필이미지">
   </div>
-  {% if user.is_authenticated and user == datas.username %}
+  {% if user.is_authenticated and user == datas.pk %}
   <div class="update_info">
     <br>
     <form method="POST" enctype="multipart/form-data">
