@@ -4,7 +4,7 @@
 <div class="container">
   <form class="" method="POST">
     {% csrf_token %}
-    <br>{{ form }}
+    <br>{{ form|safe }}
     <br><button type="submit">submit</button>
   </form>
 </div>

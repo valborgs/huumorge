@@ -20,7 +20,7 @@
     <hr>
     <div class="post-body">
       <div class="content">
-        <br>{{ data.content }}
+        <br>{{ data.content|safe }}
       </div>
     </div>
     {% if user.is_authenticated and user == data.author %}
