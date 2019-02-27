@@ -21,6 +21,7 @@
         <br>{{form.as_p}}
         <br><button type="submit" class="btn">login</button>
       </form>
+      <br><p>Did you forget your password? <a href="{% url 'password_reset' %}"><strong>password reset</strong></a> here!</p>
       <br><p>Don't have an account? <a href="{% url 'users:register' %}"><strong>register</strong></a> here!</p>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
