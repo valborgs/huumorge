@@ -12,31 +12,34 @@
     {{ form.media }}
   </head>
   <body>
+    <header>
       {% block header %}
       {% include "humorge/header.html" %}
       {% endblock %}
-
+    </header>
+    <main>
       {% block main %}
       {% endblock %}
-
+    </main>
+    <footer class="page-footer" style="padding-top:10px; margin-top:10px;">
       {% block footer %}
       {% include "humorge/footer.html" %}
       {% endblock %}
-
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script type="text/javascript" src={% static "js/materialize.min.js" %}></script>
-      {% if messages %}
-          {% for message in messages %}
-              {% if message.tags == 'success'%}
-                  <script>M.toast({html: "{{message}}", classes: 'pink rounded', displayLength:2000});</script>
-              {% elif message.tags == 'info'%}
-                  <script>M.toast({html: "{{message}}", classes: 'pink rounded', displayLength:2000});</script>
-              {% elif message.tags == 'warning'%}
-                  <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
-              {% elif message.tags == 'error'%}
-                  <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
-              {% endif %}
-          {% endfor %}
-      {% endif %}
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src={% static "js/materialize.min.js" %}></script>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'pink rounded', displayLength:2000});</script>
+            {% elif message.tags == 'info'%}
+                <script>M.toast({html: "{{message}}", classes: 'pink rounded', displayLength:2000});</script>
+            {% elif message.tags == 'warning'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
   </body>
 </html>
