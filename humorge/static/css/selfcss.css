@@ -1,7 +1,6 @@
 * {
   margin: 0;
 	padding: 0;
-	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
@@ -15,18 +14,7 @@ footer {
   background-color: #ee6e73;
 }
 
-.main {display:flex; justify-content: center;}
-
-.post-head {
-  border-bottom: 1px;
-  border-style: solid;
-}
-
-.post-body {
-  border-bottom: 1px;
-  border-style: solid;
-}
-
-.comment-post {
-  border: 1;
+.main {
+  display:flex;
+  justify-content: center;
 }
