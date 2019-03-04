@@ -19,10 +19,12 @@ footer {
 
 .post-head {
   border-bottom: 1;
+  border-style: solid;
 }
 
 .post-body {
   border-bottom: 1;
+  border-style: solid;
 }
 
 .comment-post {
