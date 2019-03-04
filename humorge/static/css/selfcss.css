@@ -18,12 +18,12 @@ footer {
 .main {display:flex; justify-content: center;}
 
 .post-head {
-  border-bottom: 1;
+  border-bottom: 1px;
   border-style: solid;
 }
 
 .post-body {
-  border-bottom: 1;
+  border-bottom: 1px;
   border-style: solid;
 }
 
