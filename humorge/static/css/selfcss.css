@@ -18,3 +18,8 @@ footer {
   display:flex;
   justify-content: center;
 }
+
+.update_info {
+  border-style: solid;
+  border-bottom: 5px;
+}
