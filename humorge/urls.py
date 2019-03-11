@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import mainpage, freeboard, humorboard, free_post_detail, humor_post_detail, free_post, humor_post, free_post_remove, humor_post_remove, free_post_mod, humor_post_mod, free_post_comment, humor_post_comment, post_search
+from .views import mainpage, freeboard, humorboard, free_post_detail, humor_post_detail, free_post, humor_post, free_post_remove, humor_post_remove, free_post_mod, humor_post_mod, free_post_comment, humor_post_comment, freepost_search, humorpost_search
 
 app_name = 'humorge'
 
@@ -15,6 +15,7 @@ urlpatterns = [
     path('post_humor', humor_post, name='humor_post'),
     path('humorboard/<int:pk>/remove', humor_post_remove, name='humor_post_remove'),
     path('humorboard/<int:pk>/mod', humor_post_mod, name='humor_post_mod'),
-    path('results', post_search, name='search')
+    path('results', freepost_search, name='search'),
+    path('results', humorpost_search, name='search')
 
 ]

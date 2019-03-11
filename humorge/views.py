@@ -163,10 +163,18 @@ def humor_post_comment(request, pk):
     return render(request, 'humorge/humor_comment.html', {'form': comment_form})
 
 
-def post_search(request):
+def freepost_search(request):
     query = request.GET.get('q')
     results = FreeBoard.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
     paginator = Paginator(results, 12)
     page = request.GET.get('page')
     datas = paginator.get_page(page)
     return render(request, 'humorge/freeboard.html', {'datas':datas})
+
+def humorpost_search(request):
+    query = request.GET.get('q')
+    results = HumorBoard.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+    paginator = Paginator(results, 12)
+    page = request.GET.get('page')
+    datas = paginator.get_page(page)
+    return render(request, 'humorge/humorboard.html', {'datas':datas})
