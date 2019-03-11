@@ -14,7 +14,11 @@
     <tbody>
       {% for data in datas %}
       <tr>
+        {% if data.title|length <= 15 %}
         <td><a href="{% url 'humorge:freepostdetail' pk=data.pk %}">{{ data.title }}</td>
+        {% else %}
+        <td><a href="{% url 'humorge:freepostdetail' pk=data.pk %}">{{ data.title[:10] }}...</td>
+        {% endif%}
         {% if data.nickname %}
           <td>{{ data.nickname }}</td>
         {% else %}
