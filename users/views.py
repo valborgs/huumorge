@@ -72,5 +72,4 @@ def myinfo(request):
 
     userinfo_update = UserUpdateForm(instance=request.user)
     image_update = ProfileUpdateForm(instance=request.user.profile)
-    datas = get_object_or_404(User)
-    return render(request, 'users/myinfo.html', {'datas': datas, 'update':userinfo_update, 'img':image_update})
+    return render(request, 'users/myinfo.html', {'update':userinfo_update, 'img':image_update})
