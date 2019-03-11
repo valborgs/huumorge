@@ -63,7 +63,7 @@
   </ul>
   <form class="form" action="{% url 'humorge:search' %}" method="GET">
     <input name="q" type="text" placeholder="Search" value="{{ request.GET.q }}">
-    <input class="btn" type="submit">
+    <input class="btn" type="submit" value="검색">
   </form>
 </div>
 {% endblock %}
