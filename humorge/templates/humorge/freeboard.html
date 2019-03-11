@@ -61,7 +61,7 @@
       <li class="waves-effect"><a href="?page={{ datas.paginator.num_pages}}"><i class="material-icons">fast_forward</i></a>/</li>
     {% endif %}
   </ul>
-  <div class="container">
+  <div class="container" style="padding-bottom:10px;">
     <form class="form" action="{% url 'humorge:free_search' %}" method="GET">
       <input name="q" type="text" placeholder="Search" value="{{ request.GET.q }}"><input class="btn" type="submit" value="검색">
     </form>
