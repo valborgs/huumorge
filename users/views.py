@@ -56,7 +56,7 @@ def login(request):
     return render(request, 'users/login.html', {'form': login_form})
 
 @login_required
-def myinfo(request, pk):
+def myinfo(request):
     if request.method == "POST":
         userinfo_update = UserUpdateForm(request.POST, instance=request.user)
         image_update = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
@@ -64,11 +64,10 @@ def myinfo(request, pk):
             userinfo_update.save()
             image_update.save()
             messages.info(request, "Your information has been changed!")
-            return redirect("users:myinfo", pk)
+            return redirect("users:myinfo")
         else:
             messages.error(request, "can't change your information!")
 
     userinfo_update = UserUpdateForm(instance=request.user)
     image_update = ProfileUpdateForm(instance=request.user.profile)
-    datas = get_object_or_404(User, pk=pk)
-    return render(request, 'users/myinfo.html', {'datas': datas, 'update':userinfo_update, 'img':image_update})
+    return render(request, 'users/myinfo.html', {'update':userinfo_update, 'img':image_update})

@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.views.generic import UpdateView
+from django.db.models import Q
 from humorge.forms import FreePostForm, HumorPostForm, FreeCommentForm, HumorCommentForm
 
 
@@ -176,3 +177,20 @@ def humor_post_comment(request, pk):
     else:
         comment_form = HumorCommentForm()
     return render(request, 'humorge/humor_comment.html', {'form': comment_form})
+
+
+def freepost_search(request):
+    query = request.GET.get('q')
+    results = FreeBoard.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+    paginator = Paginator(results, 12)
+    page = request.GET.get('page')
+    datas = paginator.get_page(page)
+    return render(request, 'humorge/freeboard.html', {'datas':datas})
+
+def humorpost_search(request):
+    query = request.GET.get('q')
+    results = HumorBoard.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+    paginator = Paginator(results, 12)
+    page = request.GET.get('page')
+    datas = paginator.get_page(page)
+    return render(request, 'humorge/humorboard.html', {'datas':datas})

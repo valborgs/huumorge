@@ -6,17 +6,17 @@
   <h2 style="margin-top:30px">내정보</h2>
   <div class="myinfo_id">
     <br>
-    <p>아이디</p> <strong>{{ datas.username }}</strong>
+    <p>아이디</p> <strong>{{ user.username }}</strong>
   </div>
   <div class="myinfo_email">
     <br>
-    <p>이메일</p> <strong>{{ datas.email }}</strong>
+    <p>이메일</p> <strong>{{ user.email }}</strong>
   </div>
   <div class="image">
     <br>
-    <img src="{{ datas.profile.image.url }}" alt="프로필이미지">
+    <img src="{{ user.profile.image.url }}" alt="프로필이미지">
   </div>
-  {% if user.is_authenticated and user.username == datas.username %}
+  {% if user.is_authenticated %}
   <div class="update_info">
     <br>
     <form method="POST" enctype="multipart/form-data">

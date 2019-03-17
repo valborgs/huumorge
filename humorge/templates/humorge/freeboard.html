@@ -14,7 +14,11 @@
     <tbody>
       {% for data in datas %}
       <tr>
+        {% if data.title|length <= 15 %}
         <td><a href="{% url 'humorge:freepostdetail' pk=data.pk %}">{{ data.title }}</td>
+        {% else %}
+        <td><a href="{% url 'humorge:freepostdetail' pk=data.pk %}">{{ data.title|truncatechars:20 }}</td>
+        {% endif%}
         {% if data.nickname %}
           <td>{{ data.nickname }}</td>
         {% else %}
@@ -57,5 +61,10 @@
       <li class="waves-effect"><a href="?page={{ datas.paginator.num_pages}}"><i class="material-icons">fast_forward</i></a>/</li>
     {% endif %}
   </ul>
+  <div class="container" style="padding-bottom:10px;">
+    <form class="form" action="{% url 'humorge:free_search' %}" method="GET">
+      <input name="q" type="text" placeholder="Search" value="{{ request.GET.q }}"><input class="btn" type="submit" value="검색">
+    </form>
+  </div>
 </div>
 {% endblock %}
