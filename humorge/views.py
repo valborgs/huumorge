@@ -15,9 +15,12 @@ from humorge.forms import FreePostForm, HumorPostForm, FreeCommentForm, HumorCom
 
 # Create your views here.
 
+#메인페이지 뷰
 def mainpage(request):
     return render(request, 'humorge/index.html')
 
+######################################################################################################################
+#자유게 뷰
 def freeboard(request):
     data = FreeBoard.objects.order_by('-date').prefetch_related('free_comments')
     paginator = Paginator(data, 12)
@@ -25,53 +28,7 @@ def freeboard(request):
     datas = paginator.get_page(page)
     return render(request, 'humorge/freeboard.html', {'datas': datas})
 
-def free_post_detail(request, pk):
-    data = get_object_or_404(FreeBoard, pk=pk)
-    if request.method == "POST":
-        comment_form = FreeCommentForm(request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.freeboard = data
-            comment.author = request.user
-            comment.date = timezone.now()
-            comment.save()
-            return redirect("humorge:freepostdetail", pk=data.pk)
-    else:
-        comment_form = FreeCommentForm()
-    return render(request, 'humorge/free_post.html', {'data': data, 'form': comment_form})
-
-def free_post_remove(request, pk):
-    data = get_object_or_404(FreeBoard, pk=pk)
-    data.delete()
-    return redirect("humorge:freeboard")
-
-def humorboard(request):
-    data = HumorBoard.objects.order_by('-date').prefetch_related('humor_comments')
-    paginator = Paginator(data, 12)
-    page = request.GET.get('page')
-    datas = paginator.get_page(page)
-    return render(request, 'humorge/humorboard.html', {'datas': datas})
-
-def humor_post_detail(request, pk):
-    data = get_object_or_404(HumorBoard, pk=pk)
-    if request.method == "POST":
-        comment_form = HumorCommentForm(request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.humorboard = data
-            comment.author = request.user
-            comment.date = timezone.now()
-            comment.save()
-            return redirect("humorge:humorpostdetail", pk=data.pk)
-    else:
-        comment_form = HumorCommentForm()
-    return render(request, 'humorge/humor_post.html', {'data': data, 'form': comment_form})
-
-def humor_post_remove(request, pk):
-    data = get_object_or_404(HumorBoard, pk=pk)
-    data.delete()
-    return redirect("humorge:humorboard")
-
+#자유게 게시글 작성
 @login_required
 def free_post(request):
     if request.method == "POST":
@@ -87,22 +44,13 @@ def free_post(request):
         free_form = FreePostForm()
     return render(request, 'humorge/post_free.html', {'free_form': free_form})
 
-@login_required
-def humor_post(request):
-    if request.method == "POST":
-        form = HumorPostForm(request.POST)
-        if form.is_valid():
-            humor_post = form.save(commit=False)
-            humor_post.author = request.user
-            humor_post.date = timezone.now()
-            humor_post.save()
-            return redirect("humorge:humorpostdetail", pk=humor_post.pk)
+#자유게 게시글 삭제
+def free_post_remove(request, pk):
+    data = get_object_or_404(FreeBoard, pk=pk)
+    data.delete()
+    return redirect("humorge:freeboard")
 
-    else:
-        form = HumorPostForm()
-    return render(request, 'humorge/post_humor.html', {'form': form})
-
-
+#자유게 게시글 수정
 @login_required
 def free_post_mod(request, pk):
     data = get_object_or_404(FreeBoard, pk=pk)
@@ -118,6 +66,48 @@ def free_post_mod(request, pk):
         free_form = FreePostForm(instance=data)
     return render(request, 'humorge/post_free.html', {'free_form': free_form})
 
+#자유게 게시글 뷰, 댓글 작성
+def free_post_detail(request, pk):
+    data = get_object_or_404(FreeBoard, pk=pk)
+    if request.method == "POST":
+        comment_form = FreeCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.freeboard = data
+            comment.author = request.user
+            comment.date = timezone.now()
+            comment.save()
+            return redirect("humorge:freepostdetail", pk=data.pk)
+    else:
+        comment_form = FreeCommentForm()
+    return render(request, 'humorge/free_post.html', {'data': data, 'form': comment_form})
+
+######################################################################################################################
+#유머게 뷰
+def humorboard(request):
+    data = HumorBoard.objects.order_by('-date').prefetch_related('humor_comments')
+    paginator = Paginator(data, 12)
+    page = request.GET.get('page')
+    datas = paginator.get_page(page)
+    return render(request, 'humorge/humorboard.html', {'datas': datas})
+
+#유머게 게시글 작성
+@login_required
+def humor_post(request):
+    if request.method == "POST":
+        form = HumorPostForm(request.POST)
+        if form.is_valid():
+            humor_post = form.save(commit=False)
+            humor_post.author = request.user
+            humor_post.date = timezone.now()
+            humor_post.save()
+            return redirect("humorge:humorpostdetail", pk=humor_post.pk)
+
+    else:
+        form = HumorPostForm()
+    return render(request, 'humorge/post_humor.html', {'form': form})
+
+#유머게 게시글 수정
 @login_required
 def humor_post_mod(request, pk):
     data = get_object_or_404(HumorBoard, pk=pk)
@@ -133,6 +123,30 @@ def humor_post_mod(request, pk):
         humor_form = HumorPostForm(instance=data)
     return render(request, 'humorge/post_humor.html', {'form': humor_form})
 
+#유머게 게시글 삭제
+def humor_post_remove(request, pk):
+    data = get_object_or_404(HumorBoard, pk=pk)
+    data.delete()
+    return redirect("humorge:humorboard")
+
+#유머게 게시글 뷰, 댓글 작성
+def humor_post_detail(request, pk):
+    data = get_object_or_404(HumorBoard, pk=pk)
+    if request.method == "POST":
+        comment_form = HumorCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.humorboard = data
+            comment.author = request.user
+            comment.date = timezone.now()
+            comment.save()
+            return redirect("humorge:humorpostdetail", pk=data.pk)
+    else:
+        comment_form = HumorCommentForm()
+    return render(request, 'humorge/humor_post.html', {'data': data, 'form': comment_form})
+
+######################################################################################################################
+#자유게 댓글 뷰
 @login_required
 def free_post_comment(request, pk):
     post = get_object_or_404(FreeBoard, pk=pk)
@@ -147,6 +161,8 @@ def free_post_comment(request, pk):
         comment_form = FreeCommentForm()
     return render(request, 'humorge/free_comment.html', {'form': comment_form})
 
+
+#유머게 댓글 뷰
 @login_required
 def humor_post_comment(request, pk):
     post = get_object_or_404(HumorBoard, pk=pk)

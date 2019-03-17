@@ -12,8 +12,6 @@ from .forms import NewUserForm, UserUpdateForm, ProfileUpdateForm
 
 # Create your views here.
 
-
-
 def register(request):
     if request.method == "POST":
         regiform = NewUserForm(request.POST)
