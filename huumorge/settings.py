@@ -164,3 +164,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'voll1212@gmail.com'
 EMAIL_HOST_PASSWORD = 'alstlr1307!'
+
+#로그인세션타임아웃
+SESSION_COOKIE_AGE = 1200 #타임아웃시간설정 20분
+SESSION_SAVE_EVERY_REQUEST = True #사용자가 아무런 리퀘스트를 보내지 않는 시간을 세션타임아웃시간으로 설정
